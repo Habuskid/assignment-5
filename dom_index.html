@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 5 - DOM Manipulation</title>
+  <style>
+    /* General Page Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .task {
+      background: #fff;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      max-width: 700px;
+    }
+
+    .task h3 {
+      margin-top: 0;
+      color: #34495e;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    p, li {
+      font-size: 15px;
+    }
+
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 8px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    input {
+      padding: 7px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* Box for task 2 */
+    .box {
+      width: 150px;
+      height: 100px;
+      background: gray;
+      margin: 10px 0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Toggle card for task 6 */
+    #card {
+      width: 200px;
+      height: 100px;
+      margin-top: 10px;
+      padding: 15px;
+      background: #ecf0f1;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    #card.active {
+      border: 3px solid #27ae60;
+      background: #e8f8f5;
+    }
+
+    /* List styling */
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 3px 0;
+      transition: 0.3s ease;
+    }
+
+    li:hover {
+      transform: translateX(5px);
+    }
+
+    /* Container for generated paragraphs */
+    #container p {
+      background: #fff;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Profile image */
+    #profilePic {
+      display: block;
+      margin-top: 10px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    /* Output text */
+    #output {
+      font-weight: bold;
+      margin-top: 8px;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Assignment 5: DOM Manipulation</h1>
+
+  <!-- 1. Select and Change Text -->
+  <div class="task">
+    <h3>1. Change Text</h3>
+    <p id="demo">Original Text</p>
+  </div>
+
+  <!-- 2. Change Styles -->
+  <div class="task">
+    <h3>2. Change Styles</h3>
+    <div class="box">Box</div>
+  </div>
+
+  <!-- 3. Add New Element -->
+  <div class="task">
+    <h3>3. Add New Element</h3>
+    <ul id="list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+  </div>
+
+  <!-- 4. Remove Element -->
+  <div class="task">
+    <h3>4. Remove Element</h3>
+    <button id="deleteBtn">Delete Me</button>
+  </div>
+
+  <!-- 5. Event Listener -->
+  <div class="task">
+    <h3>5. Event Listener</h3>
+    <button id="clickMe">Click Me</button>
+    <p id="message">Waiting...</p>
+  </div>
+
+  <!-- 6. Toggle Class -->
+  <div class="task">
+    <h3>6. Toggle Class</h3>
+    <button id="toggleBtn">Toggle Card</button>
+    <div id="card">Card Content</div>
+  </div>
+
+  <!-- 7. Form Handling -->
+  <div class="task">
+    <h3>7. Form Handling</h3>
+    <form id="nameForm">
+      <input id="nameInput" type="text" placeholder="Enter your name" required>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="output"></p>
+  </div>
+
+  <!-- 8. Change Attributes -->
+  <div class="task">
+    <h3>8. Change Attributes</h3>
+    <img id="profilePic" src="image/pfp.jpg" alt="Profile">
+    <button id="changePicBtn" src="image/pfp.jpg">Change Picture</button>
+  </div>
+
+  <!-- 9. Create Multiple Elements -->
+  <div class="task">
+    <h3>9. Create Multiple Elements</h3>
+    <div id="container"></div>
+  </div>
+
+  <!-- 10. DOM Traversal -->
+  <div class="task">
+    <h3>10. DOM Traversal</h3>
+    <ul id="menu">
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+
+  <script>
+    // 1. Change Text inside <p id="demo">
+    document.getElementById("demo").textContent = "Hello, DOM!";
+
+    // 2. Change background color of <div class="box">
+    document.querySelector(".box").style.backgroundColor = "lightblue";
+
+    // 3. Create and append a new <li> to <ul id="list">
+    let newItem = document.createElement("li");
+    newItem.textContent = "New Item";
+    document.getElementById("list").appendChild(newItem);
+
+    // 4. Remove the <button id="deleteBtn"> from the DOM
+    let btn = document.getElementById("deleteBtn");
+    btn.remove();
+
+    // 5. Add event listener to <button id="clickMe">
+    document.getElementById("clickMe").addEventListener("click", function() {
+      document.getElementById("message").textContent = "Button Clicked!";
+    });
+
+    // 6. Toggle the "active" class on <div id="card">
+    document.getElementById("toggleBtn").addEventListener("click", function() {
+      document.getElementById("card").classList.toggle("active");
+    });
+
+    // 7. Form handling: prevent refresh and display input value
+    document.getElementById("nameForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let name = document.getElementById("nameInput").value;
+      document.getElementById("output").textContent = "Hello, " + name;
+    });
+
+    // 8. Toggle between two profile pictures
+    document.getElementById("changePicBtn").addEventListener("click", function() {
+      let img = document.getElementById("profilePic");
+      if (img.getAttribute("src") === "image/pfp.jpg") {
+        img.setAttribute("src", "image/profile.png");
+      } else {
+        img.setAttribute("src", "image/pfp.jpg");
+      }
+    });
+
+    // 9. Create 5 real paragraphs inside #container
+    let container = document.getElementById("container");
+    let texts = [
+      "The DOM is a programming interface for web documents.",
+      "JavaScript allows us to update content dynamically.",
+      "Event listeners help make pages interactive.",
+      "We can style elements using the style property.",
+      "Creating and removing elements makes the DOM flexible."
+    ];
+    texts.forEach(txt => {
+      let p = document.createElement("p");
+      p.textContent = txt;
+      container.appendChild(p);
+    });
+
+    // 10. DOM Traversal: first and last <li>
+    let menu = document.getElementById("menu");
+    menu.firstElementChild.style.color = "red";
+    menu.firstElementChild.style.fontWeight = "bold";
+    menu.lastElementChild.style.color = "blue";
+    menu.lastElementChild.style.fontWeight = "bold";
+  </script>
+</body>
+</html>
